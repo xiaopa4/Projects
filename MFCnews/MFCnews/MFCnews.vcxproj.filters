@@ -33,10 +33,10 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DialogA.h">
+    <ClInclude Include="DialogB.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DialogB.h">
+    <ClInclude Include="DialogA.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

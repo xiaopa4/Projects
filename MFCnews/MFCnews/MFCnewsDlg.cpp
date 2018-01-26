@@ -1,4 +1,13 @@
-
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 消息提示器
+* 摘 要： 定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // MFCnewsDlg.cpp : 实现文件
 //
 
@@ -119,6 +128,9 @@ BOOL CMFCnewsDlg::OnInitDialog()
 	CTime cTime = CTime::GetCurrentTime();
 	//设置时钟
 	SetTimer(1, 1000, NULL);
+	
+		m_Tip.EnableWindow(FALSE);
+	
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -172,7 +184,16 @@ HCURSOR CMFCnewsDlg::OnQueryDragIcon()
 }
 
 
-
+/***************************************************************************
+* 函数名称：[OnTimer]
+* 摘 要： 在 SetTimer 成员函数中指定的每个间隔用于安装后计时器
+* 全局影响：显示消息
+* 参数：INT_PTR nIDEvent
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CMFCnewsDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO:  在此添加消息处理程序代码和/或调用默认值
@@ -191,37 +212,66 @@ void CMFCnewsDlg::OnTimer(UINT_PTR nIDEvent)
 		strName = _T("消息名称:\r\n");
 		strContent = _T(" \r\n消息内容:\r\n");
 		int ShowNums = v_strShowContent.size();
-	    static vector<int>::size_type i=0;
+	    vector<int>::size_type i;
 		//重复显示
 		if ( m_x==ShowNums)
 			//全局变量
 			m_x = 0;
-		for (i = 0; i < v_strName.size(); )
+		//查找显示消息的顺序，以便找到显示的内容
+		for (i = 0; i < v_strName.size(); i++)
 		{
 			if (v_strShowContent[m_x] == v_strName[i])
 			{
 				break;
 			}
-			i++;
+			
 		}
-
+		//拼接显示的字符
 		strName = strName + v_strShowContent[m_x++];
 		strName = strName + strContent + v_strContent[i];
+		//显示
 		m_Edit.SetWindowText(strName);
 	}
 	CDialogEx::OnTimer(nIDEvent);
 }
+
+/***************************************************************************
+* 函数名称：[OnMyTIPMessage]
+* 摘 要： 自定义消息
+* 全局影响：
+* 参数：WPARAM wParam, LPARAM lParam
+* 返回值：0
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 LRESULT  CMFCnewsDlg::OnMyTIPMessage(WPARAM wParam, LPARAM lParam)
 {
 	// TODO: 处理用户自定义消息 
+
+	//消息显示间隔时间
 	m_nTime = m_DlgA.m_nTime;
 	int NameNums, ShowNums;
+	//消息总数
 	NameNums = m_DlgA.v_strName.size();
 	CString str;
+	//要显示的消息数
+	ShowNums = m_DlgA.v_strShow.size();
+	//开始提示按钮是否禁用，要显示的消息为0则禁用，否则启用
+	if (ShowNums != 0)
+	{
+		m_Tip.EnableWindow(TRUE);
+	}
+	else
+	{
+		m_Tip.EnableWindow(FALSE);
+	}
+	//总数为0，不做处理
 	if (NameNums == 0)
 	{
 		return 0;
 	}
+	//保存传过来的消息
 	vector<int>::size_type i;
 	for (i = 0; i < NameNums; i++)
 	{
@@ -231,7 +281,6 @@ LRESULT  CMFCnewsDlg::OnMyTIPMessage(WPARAM wParam, LPARAM lParam)
 		v_strContent.push_back(str);
 	}
 
-	ShowNums = m_DlgA.v_strShow.size();
 	if ( ShowNums == 0 )
 	{
 	return 0;
@@ -242,6 +291,15 @@ LRESULT  CMFCnewsDlg::OnMyTIPMessage(WPARAM wParam, LPARAM lParam)
 		str = m_DlgA.v_strShow[j];
 		v_strShowContent.push_back(str);
 	}
+	
+	/*if (ShowNums != 0)
+	{
+		m_Tip.EnableWindow(TRUE);
+	}
+	else
+	{
+		m_Tip.EnableWindow(FALSE);
+	}*/
 	
 	return 0;
 }
@@ -265,12 +323,21 @@ void CMFCnewsDlg::OnClose()
 //	// TODO:  在此添加控件通知处理程序代码
 //}
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedButton]
+* 摘 要： 点击消息管理按钮的操作
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CMFCnewsDlg::OnBnClickedButton1()
 {
 	// TODO:  在此添加控件通知处理程序代码
 	
-	vector<int>::size_type i = 0;
+	vector<int>::size_type i;
 	//编辑框中显示的内容
 	for (i = 0; i < v_strShowContent.size(); i++)
 	{
@@ -285,7 +352,16 @@ void CMFCnewsDlg::OnBnClickedButton1()
 	
 }
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedCheck1]
+* 摘 要： 置顶
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CMFCnewsDlg::OnBnClickedCheck1()
 {
 	// TODO:  在此添加控件通知处理程序代码
@@ -297,6 +373,7 @@ void CMFCnewsDlg::OnBnClickedCheck1()
 	{
 		/*::SetWindowPos(this->GetSafeHwnd(), HWND_TOPMOST, 0, 0, 0, 0,
 			SWP_HIDEWINDOW | SWP_NOACTIVATE | SWP_NOSIZE);*/
+		//置顶窗口，不能移动，不能改变大小
 		::SetWindowPos(this->GetSafeHwnd(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 		m_Stick.SetWindowTextW(_T("取消置顶"));
 	}
@@ -304,6 +381,7 @@ void CMFCnewsDlg::OnBnClickedCheck1()
 	{
 		/*::SetWindowPos(this->GetSafeHwnd(), HWND_NOTOPMOST, 0, 0, 0, 0,
 			SWP_HIDEWINDOW | SWP_NOACTIVATE | SWP_NOSIZE);*/
+		//取消置顶
 		::SetWindowPos(this->GetSafeHwnd(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 		m_Stick.SetWindowTextW(_T("置顶"));
 	}
@@ -321,7 +399,16 @@ void CMFCnewsDlg::OnEnChangeMessage()
 	// TODO:  在此添加控件通知处理程序代码
 }
 
-
+/***************************************************************************
+* 函数名称：[OnClickedTips1]
+* 摘 要： 开始提示
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CMFCnewsDlg::OnClickedTips()
 {
 	// TODO:  在此添加控件通知处理程序代码
@@ -330,17 +417,20 @@ void CMFCnewsDlg::OnClickedTips()
 	if (tip == _T("开始提示"))
 	{
 		m_T = TRUE;
+		//禁用消息管理按钮
 		GetDlgItem(IDC_BUTTON1)->EnableWindow(FALSE);
-		GetDlgItem(IDC_MESSAGE)->EnableWindow(TRUE);
+		//GetDlgItem(IDC_MESSAGE)->EnableWindow(TRUE);
 		m_Tip.SetWindowTextW(_T("停止提示"));
+		//打开定时器，间隔显示消息
 		SetTimer(1, m_nTime, NULL);
 		m_x = 0;
 	}
 	else
 	{
 		m_T = FALSE;
+		//启用消息管理按钮
 		GetDlgItem(IDC_BUTTON1)->EnableWindow(TRUE);
-		GetDlgItem(IDC_MESSAGE)->EnableWindow(FALSE);
+		//GetDlgItem(IDC_MESSAGE)->EnableWindow(FALSE);
 		m_Tip.SetWindowTextW(_T("开始提示"));
 
 	}

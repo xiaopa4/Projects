@@ -270,12 +270,12 @@ void CMaillistDlg::OnBnClickedAddg()
 	}
 	else
 	{
-		static int i;
+		int i;
 		for (i = 0; i < 20; i++)
 		{
 			if (m_strMsg[i][0] == m_strName)
 			{
-				MessageBox(L" 已存在该人名！");
+				MessageBox(_T(" 已存在该人名！"));
 				return;
 			}
 		}
@@ -341,15 +341,13 @@ void CMaillistDlg::OnNMClickContactTree(NMHDR *pNMHDR, LRESULT *pResult)
 		//选择的是父节点
 		if (m_clsTree.GetParentItem(hPreHandle) == NULL)
 		{
-			m_clsTree.SetItemImage(hPreHandle, 3, 3);
-			//m_clsTree.SetItemImage( hPreHandle,2,0);
-			//m_clsTree.RedrawWindow();
+			m_clsTree.SetItemImage(hPreHandle, 1, 1);
+			
 		}
 		else
 		{
-			m_clsTree.SetItemImage(hPreHandle, 2, 2);
-			//m_clsTree.SetItemImage( hPreHandle,3,1);
-			//m_clsTree.RedrawWindow();
+			m_clsTree.SetItemImage(hPreHandle, 0, 0);
+			
 		}
 		m_clsTree.PostMessage(WM_KILLFOCUS, 0, 0);
 		m_clsTree.RedrawWindow();
@@ -361,18 +359,18 @@ void CMaillistDlg::OnNMClickContactTree(NMHDR *pNMHDR, LRESULT *pResult)
 		m_clsTree.SelectItem(hItem);
 
 		hHandle = m_clsTree.GetSelectedItem();
-		//////////
+		
 		if (m_clsTree.GetParentItem(hPreHandle) == NULL)
 		{
-			//m_clsTree.SetItemImage( hPreHandle,2,2);
+			
 			m_clsTree.SetItemImage(hPreHandle, 1, 3);
-			//m_clsTree.RedrawWindow();
+			
 		}
 		else
 		{
-			//m_clsTree.SetItemImage( hPreHandle,3,3);
+			
 			m_clsTree.SetItemImage(hPreHandle, 0, 2);
-			//m_clsTree.RedrawWindow();
+			
 		}
 		//获取前选中项的句柄为父节点
 		hPreHandle = hHandle;
@@ -448,7 +446,7 @@ void CMaillistDlg::OnBnClickedForm()
 	}
 	else
 	{
-		static int i;
+		int i;
 		for (i = 0; i < 30; i++)
 		{
 			if (m_strName == m_strMsg[i][0])

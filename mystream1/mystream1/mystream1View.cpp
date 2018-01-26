@@ -1,4 +1,14 @@
 
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 流媒体管理器
+* 摘 要： 定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // mystream1View.cpp : Cmystream1View 类的实现
 //
 
@@ -38,6 +48,7 @@ END_MESSAGE_MAP()
 
 Cmystream1View::Cmystream1View()
 	: CFormView(Cmystream1View::IDD)
+	//变量初始化
 	, m_initOK(false)
 	, i(0)
 	, m_nSelmark(-1)
@@ -75,6 +86,7 @@ void Cmystream1View::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
 	GetParentFrame()->RecalcLayout();
+	// 根据视图的尺寸重新调整父窗口的大小.
 	ResizeParentToFit();
 	//this->SetActiveWindow();
 	m_initOK = TRUE;
@@ -86,7 +98,7 @@ void Cmystream1View::OnInitialUpdate()
 	m_List.InsertColumn(2, _T("流类型"), LVCFMT_LEFT, rect.Width() / 8, 2);
 	m_List.InsertColumn(3, _T("流地址"), LVCFMT_LEFT, 2 * rect.Width() / 8, 3);
 	m_List.InsertColumn(4, _T("备注"), LVCFMT_LEFT, 3 * rect.Width() / 8, 4);
-	//设置行数和列数(制表格)       使选中的行点亮  
+	//设置行数和列数使选中的行点亮  
 	m_List.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT);
 
 }
@@ -115,12 +127,22 @@ Cmystream1Doc* Cmystream1View::GetDocument() const // 非调试版本是内联的
 
 // Cmystream1View 消息处理程序
 
-
+/***************************************************************************
+* 函数名称：[OnSize]
+* 摘 要： 调整窗口大小
+* 全局影响：
+* 参数：UINT nType, int cx, int cy
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void Cmystream1View::OnSize(UINT nType, int cx, int cy)
 {
 	CFormView::OnSize(nType, cx, cy);
 
 	// TODO:  在此处添加消息处理程序代码
+	
 	CRect rect;
 	if (true == m_initOK)
 	{
@@ -128,6 +150,7 @@ void Cmystream1View::OnSize(UINT nType, int cx, int cy)
 		if (pWnd->GetSafeHwnd())
 		{
 			pWnd->MoveWindow(0, 0, cx, cy);
+			//获取客服区大小
 			this->GetClientRect(&rect);
 			m_List.SetColumnWidth(0, rect.Width() / 8);
 			m_List.SetColumnWidth(1, rect.Width() / 8);
@@ -140,7 +163,16 @@ void Cmystream1View::OnSize(UINT nType, int cx, int cy)
 
 }
 
-
+/***************************************************************************
+* 函数名称：[OnContextMenu]
+* 摘 要： 右键弹出菜单
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void Cmystream1View::OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/)
 {
 	// TODO:  在此处添加消息处理程序代码
@@ -156,7 +188,7 @@ void Cmystream1View::OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/)
 
 	//获得子菜单
 	CMenu *pPopupMenu = menu.GetSubMenu(0);		//编号为0的子菜单
-	//弹出菜单
+	//弹出菜单	在指定的位置显示一个浮动的弹出菜单和跟踪项目的选择在弹出菜单中的
 	pPopupMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, GetParent());
 
 
@@ -169,12 +201,19 @@ void Cmystream1View::OnAdd()
 	m_clsAdddlg.DoModal();
 }
 
-
+/***************************************************************************
+* 函数名称：[OnAddOk]
+* 摘 要： 自定义消息
+* 全局影响：
+* 参数：WPARAM wParam, LPARAM lParam
+* 返回值：0
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
  LRESULT Cmystream1View::OnAddOk(WPARAM wParam, LPARAM lParam)
 {
 	CString str;
-	//CString str1;
-	//static int i= 0;
 	//显示序号
 	//CString* m_pAdd = new CString[4];
 	m_pAdd =  m_clsAdddlg.m_pAdd;
@@ -183,6 +222,7 @@ void Cmystream1View::OnAdd()
 	/*m_List.SetItemText(i, 1, str1);
 	str1 = m_clsAdddlg.m_strTypelist;
 	m_List.SetItemText(i, 2, str1);*/
+	//数据插入对应的行列位置
 	m_List.SetItemText(i, 1, m_pAdd[0]);
 	m_List.SetItemText(i, 2, m_pAdd[1]);
 	m_List.SetItemText(i, 3, m_pAdd[2]);
@@ -198,11 +238,22 @@ void Cmystream1View::OnAdd()
 
 
 
+ /***************************************************************************
+ * 函数名称：[OnDelet]
+ * 摘 要： 删除
+ * 全局影响：
+ * 参数：
+ * 返回值：
+ *
+ * 修改记录：
+ *[日期][作者/修改者] [修改原因]
+ ***************************************************************************/
  void Cmystream1View::OnDelet()
  {
 	 // TODO:  在此添加命令处理程序代码
 	/* if (i>0)
 	 {*/
+		//检索列表视图控件的选择标记
 		 m_nSelmark = m_List.GetSelectionMark();
 		 if (m_nSelmark==-1)
 		 {
@@ -212,7 +263,9 @@ void Cmystream1View::OnAdd()
 		 {
 			 if (m_clsDelet.DoModal() == IDOK)
 			 {
+				 //删除给行
 				m_List. DeleteItem(m_nSelmark);
+				//刷新列表
 				for (int j = m_nSelmark; j < i; j++)
 				{
 				CString str;
@@ -282,15 +335,27 @@ void Cmystream1View::OnAdd()
  }
 
 
-
+ /***************************************************************************
+ * 函数名称：[OnPropety]
+ * 摘 要： 属性信息
+ * 全局影响：
+ * 参数：
+ * 返回值：
+ *
+ * 修改记录：
+ *[日期][作者/修改者] [修改原因]
+ ***************************************************************************/
  void Cmystream1View::OnPropety()
  {
 	 // TODO:  在此添加命令处理程序代码
+	 //选择行序号
 	 m_nSelmark = m_List.GetSelectionMark();
+	 //保存数据到数组
 	 m_Propety[0] = m_List.GetItemText(m_nSelmark, 1);
 	 m_Propety[1] = m_List.GetItemText(m_nSelmark, 2);
 	 m_Propety[2] = m_List.GetItemText(m_nSelmark, 3);
 	 m_Propety[3] = m_List.GetItemText(m_nSelmark, 4);
+	 //转存
 	 m_clsPropetyDlg.m_Propety = m_Propety;
 	 m_clsPropetyDlg.DoModal();
 

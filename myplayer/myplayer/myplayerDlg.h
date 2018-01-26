@@ -1,9 +1,19 @@
-
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 播放器的设置
+* 摘 要： 头文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // myplayerDlg.h : 头文件
 //
 
 #pragma once
-#include "afxwin.h"
+#include "afxwin.h"		// 引用标准库的头文件
+//	自定义消息
 #define NM_CHANGE   (WM_USER+100)
 
 // CmyplayerDlg 对话框
@@ -46,26 +56,32 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
+	//语言栏
 	CComboBox m_CB_Language;
+	//判断语言栏时候改变
 	afx_msg void OnCbnSelchangeCombo();
+	//判断老板键时候按下
 	afx_msg void OnBnClickedChBosskey();
-//	afx_msg void OnBnClickedCheck2();
-//	afx_msg void OnBnClickedCheck3();
+	//时长编辑框是否改变
 	afx_msg void OnEnChangeEdit1();
+	//立即检测
 	afx_msg void OnBnClickedButton1();
+	//内存溢出处理函数
 	afx_msg void OnNMOutofmemoryHotkey1(NMHDR *pNMHDR, LRESULT *pResult);
-//	afx_msg void OnBnClickedCheck4();
-//	afx_msg void OnBnClickedCheck5();
-//	afx_msg void OnBnClickedRadio1();
-//	afx_msg void OnBnClickedRadio2();
-//	afx_msg void OnBnClickedRadio3();
 	// 修改了 播放、升级选项激活应用按钮
 	afx_msg void OnClickItem(UINT nID);
+	//自定义热键框处理函数
 	afx_msg void OnHotkeyChange();
-	BOOL LoadConfig();// 加载配置
-	BOOL SaveConfig();// 保存配置
+	// 加载配置
+	BOOL LoadConfig();
+	// 保存配置
+	BOOL SaveConfig();
+	//确定
 	afx_msg void OnBnClickedOk();
+	//取消
 	afx_msg void OnBnClickedCancel();
+	//应用
 	afx_msg void OnBnClickedApply();
+	//老板键
 	CButton m_BossKey;
 };

@@ -1,4 +1,13 @@
-
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 流媒体管理器
+* 摘 要： 头文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // mystream1View.h : Cmystream1View 类的接口
 //
 
@@ -47,25 +56,39 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
+	//表格控件变量
 	CListCtrl m_List;
+	//调整大小
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	//右键菜单栏
 	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
+	//初始化完成标识符
 	BOOL m_initOK;
+	//添加流媒体
 	afx_msg void OnAdd();
+	//添加流媒体对话框相关联变量
 	CAdddialog m_clsAdddlg;
 protected:
+	//自定义消息
 	afx_msg LRESULT OnAddOk(WPARAM wParam, LPARAM lParam);
 public:
 
 	int i;
 	CString* m_pAdd;
+	//删除
 	afx_msg void OnDelet();
 	CDeletDialog m_clsDelet;
+	//序号
 	long long  m_nSelmark;
+	//禁用或启用删除
 	afx_msg void OnUpdateDelet(CCmdUI *pCmdUI);
+	//全部删除
 	afx_msg void OnEarseall();
+	//禁用或启用全部删除
 	afx_msg void OnUpdateEarseall(CCmdUI *pCmdUI);
+	//属性
 	afx_msg void OnPropety();
+	//禁用或启用属性菜单栏
 	afx_msg void OnUpdatePropety(CCmdUI *pCmdUI);
 	CPropetydialog m_clsPropetyDlg;
 //	CString m_Add[4];

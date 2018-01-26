@@ -1,3 +1,14 @@
+
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 消息提示器
+* 摘 要： 消息管理对话框定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // DialogA.cpp : 实现文件
 //
 
@@ -14,6 +25,7 @@ IMPLEMENT_DYNAMIC(CDialogA, CDialogEx)
 
 CDialogA::CDialogA(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CDialogA::IDD, pParent)
+	//初始化变量
 	, m_strMlist(_T(""))
 	, m_strTiplist(_T(""))
 	, m_Edit_Time(666)
@@ -41,7 +53,7 @@ void CDialogA::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CDialogA, CDialogEx)
 	ON_MESSAGE(WM_MY_MESSAGE, OnMyMessage)
 	ON_BN_CLICKED(IDC_ADD, &CDialogA::OnClickedAdd)
-	ON_LBN_SELCHANGE(IDC_MESSAGE_LIST, &CDialogA::OnLbnSelchangeMessageList)
+	//ON_LBN_SELCHANGE(IDC_MESSAGE_LIST, &CDialogA::OnLbnSelchangeMessageList)
 	ON_BN_CLICKED(IDC_MINUS, &CDialogA::OnBnClickedMinus)
 	ON_BN_CLICKED(IDC_RIGHT, &CDialogA::OnBnClickedRight)
 	ON_BN_CLICKED(IDC_LEFT, &CDialogA::OnBnClickedLeft)
@@ -57,34 +69,63 @@ END_MESSAGE_MAP()
 
 // CDialogA 消息处理程序
 
+/***************************************************************************
+* 函数名称：[OnMyMessage]
+* 摘 要： 自定义消息处理
+* 全局影响：接收并保存新建消息
+* 参数： WPARAM wParam, LPARAM lParam消息字段
+* 返回值：0
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 LRESULT  CDialogA::OnMyMessage(WPARAM wParam, LPARAM lParam)
 {
 	// TODO: 处理用户自定义消息 
-
+	//保存新建消息
 	m_MList.AddString(m_DlgB.m_strName);
 	v_strName.push_back(m_DlgB.m_strName);
 	v_strContent.push_back(m_DlgB.m_strContent);
-	//MessageBox("消息传递完成!");  
 	return 0;
 }
 
+
+/***************************************************************************
+* 函数名称：[OnClickedAdd]
+* 摘 要： 添加消息
+* 全局影响：接收并保存新建消息
+* 参数： 
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CDialogA::OnClickedAdd()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
-	
-	m_DlgB.DoModal();//用来显示一个模式对话框
+	//打开新建消息对话框（模式对话框）
+	m_DlgB.DoModal();
 
 }
 
 
-void CDialogA::OnLbnSelchangeMessageList()
-{
-	// TODO:  在此添加控件通知处理程序代码
+//void CDialogA::OnLbnSelchangeMessageList()
+//{
+//	// TODO:  在此添加控件通知处理程序代码
+//
+//}
 
-}
-
-
+/***************************************************************************
+* 函数名称：[OnInitDialog]
+* 摘 要： 重写的初始化函数
+* 全局影响：
+* 参数：
+* 返回值：true
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 BOOL CDialogA::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
@@ -96,6 +137,7 @@ BOOL CDialogA::OnInitDialog()
 	//容器中存储显示信息名称的个数
 	vector<int>::size_type i_ShowNum = v_strShow.size();
 	CString str;
+	//信息数为零不作处理
 	if (i_NameNum == 0)
 	{
 		return 0;
@@ -105,8 +147,8 @@ BOOL CDialogA::OnInitDialog()
 		//消息列表框中初始化
 		if (i_ShowNum == 0)
 		{
-			static vector<int>::size_type i;
-			for (i = 0; i < i_NameNum; i++)
+			vector<int>::size_type i;
+			for (i = 0 ; i < i_NameNum; i++)
 			{
 				m_MList.InsertString(i, v_strName[i]);
 			}
@@ -114,7 +156,7 @@ BOOL CDialogA::OnInitDialog()
 		else
 		{
 			//把要显示的数据传入提示列表中进行初始化
-			static vector<int>::size_type j;
+			vector<int>::size_type j;
 			for (j = 0; j < i_ShowNum; j++)
 			{
 				m_Tiplist.InsertString(j, v_strShow[j]);
@@ -122,9 +164,9 @@ BOOL CDialogA::OnInitDialog()
 			
 			}
 			//把其他消息传入消息列表中进行初始化
-			static vector<int>::size_type m;
-			static vector<int>::size_type n;
-			int k = 0;
+			vector<int>::size_type m;
+			vector<int>::size_type n;
+			vector<int>::size_type k = 0;
 			for (m = 0; m < i_NameNum; m++)
 			{
 				//判断要显示的消息与消息名称是否相同，若不同则把消息名称添加到消息列表中
@@ -150,8 +192,10 @@ BOOL CDialogA::OnInitDialog()
 	for (unsigned int m = 0; m < v_strName.size(); m++)
 	{
 		str = v_strName[m];
+		//所有添加的原始数据，消息名
 		v_strReName.push_back(str);
 		str = v_strContent[m];
+		//所有添加的原始数据，内容
 		v_strReContent.push_back(str);
 	}
 	//消息总数
@@ -161,7 +205,16 @@ BOOL CDialogA::OnInitDialog()
 	// 异常:  OCX 属性页应返回 FALSE
 }
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedMinus]
+* 摘 要： 删除消息
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CDialogA::OnBnClickedMinus()
 {
 	// TODO:  在此添加控件通知处理程序代码
@@ -181,6 +234,8 @@ void CDialogA::OnBnClickedMinus()
 				v_strContent.erase(v_strContent.begin() + i);
 				//擦除新建容器的消息
 				m_DlgB.v_Mnamestr.erase(m_DlgB.v_Mnamestr.begin() + i);
+				//已经擦除跳出for循环
+				break;
 			}
 		}
 
@@ -189,6 +244,7 @@ void CDialogA::OnBnClickedMinus()
 	{
 		MessageBox(_T("请选择删除项！"));
 	}
+	//v_nNums = v_strName.size();
 	m_strMlist = _T("");
 }
 
@@ -203,10 +259,11 @@ void CDialogA::OnBnClickedRight()
 		MessageBox(_T("请选择转移项！"));
 	}
 	else
-	{
+	{	//提示列表添加该消息，消息列表擦除该消息
 		m_Tiplist.AddString(m_strMlist);
 		m_MList.DeleteString(m_MList.GetCurSel());
 	}
+	UpdateData(FALSE);
 }
 
 
@@ -219,8 +276,8 @@ void CDialogA::OnBnClickedLeft()
 	{
 		MessageBox(_T("请选择转移项！"));
 	}
-	else
-	{
+	else 
+	{	//消息列表添加该消息，提示列表擦除该消息
 		m_MList.AddString(m_strTiplist);
 		m_Tiplist.DeleteString(m_Tiplist.GetCurSel());
 	}
@@ -232,11 +289,14 @@ void CDialogA::OnBnClickedRightshift()
 	// TODO:  在此添加控件通知处理程序代码
 
 	unsigned int m;
+	//列表中消息数目
 	unsigned int n =  m_MList.GetCount();
 	for ( m=0; m < n; n--)
-	{
+	{	//取得消息列表消息名
 		m_MList.GetText(m, m_strMlist);
+		//添加到提示列表
 		m_Tiplist.AddString(m_strMlist);
+		//擦除消息列表该消息
 		m_MList.DeleteString(m);
 	}
 
@@ -279,6 +339,7 @@ void CDialogA::OnBnClickedUp()
 			//m_Tiplist.GetText(m_Tiplist.GetCurSel() - 1, m_strTiplist);
 			m_Tiplist.InsertString(m_Tiplist.GetCurSel() - 1, m_strTiplist);
 			m_Tiplist.DeleteString(i+1);
+			UpdateData(FALSE);
 		}
 		
 	}
@@ -291,14 +352,14 @@ void CDialogA::OnBnClickedDown()
 	// TODO:  在此添加控件通知处理程序代码
 
 	UpdateData(true);
-	int i = m_Tiplist.GetCurSel();
+	int i = m_Tiplist.GetCount();
 	if (m_strTiplist == _T(""))
 	{
 		MessageBox(_T("请选择下移项！"));
 	}
 	else
 	{
-		if (m_Tiplist.GetCurSel() == m_Tiplist.GetCurSel() - 1)
+		if (m_Tiplist.GetCurSel() == i - 1)
 		{
 			MessageBox(_T("已经是最底层！"));
 		}
@@ -312,52 +373,79 @@ void CDialogA::OnBnClickedDown()
 	m_strTiplist = _T("");
 }
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedOk]
+* 摘 要： 确定
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CDialogA::OnBnClickedOk()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
+	//清楚容器内元素
 	v_strShow.clear();
-			CString str;
-			int ShowNums = m_Tiplist.GetCount();
-			for (int i = 0; i < ShowNums; ShowNums--)
-			{
-				m_Tiplist.GetText(i, str);
-				v_strShow.push_back(str);
-				m_Tiplist.DeleteString(i);
-			}
-			UpdateData(true);
-			this->GetParent()->SendMessage(WM_MY_TIPMESSAGE, 0, 0);
-			v_strReName.clear();
-			v_strReContent.clear();
-			v_strShow.clear();
+	CString str;
+	//获得提示列表消息数目
+	int ShowNums = m_Tiplist.GetCount();
+	//将提示列表消息名保存到v_strShow，清除提示列表
+	for (int i = 0; i < ShowNums; ShowNums--)
+		{
+			m_Tiplist.GetText(i, str);
+			v_strShow.push_back(str);
+			m_Tiplist.DeleteString(i);
+		}
+	UpdateData(true);
+	//向消息提示器窗口发送一条消息
+	this->GetParent()->SendMessage(WM_MY_TIPMESSAGE, 0, 0);
+	//清除保存的原始消息
+	v_strReName.clear();
+	v_strReContent.clear();
+	v_strShow.clear();
 		
-			OnOK();
+	 OnOK();
 }
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedCancel]
+* 摘 要： 取消
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CDialogA::OnBnClickedCancel()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
 		CString str;
 		unsigned int i;
+		//是否有消息删除了(消息数目是否改变)
 		if (v_nNums != v_strName.size())
 		{
-			bool flats = 0;
-			for (i = 0; i < v_strName.size(); i++)
+			/*bool flats = FALSE;
+			for (i = 0; i < v_strReName.size(); i++)
 			{
 				if (v_strName[i] != v_strReName[i])
 				{
-					flats = 1;
+					flats = TRUE;
 					break;
 				}
 			}
-			if (flats == 1)
-			{
+			if (flats == TRUE)
+			{*/
+				//清除改变后的消息
 				v_strName.clear();
 				v_strContent.clear();
+				//清除v_Mnamestr中保存的消息名
 				m_DlgB.v_Mnamestr.clear();
+				//将原始消息导入
 				for (i = 0; i < v_strReName.size(); i++)
 				{
 					str = v_strReName[i];
@@ -367,28 +455,41 @@ void CDialogA::OnBnClickedCancel()
 					v_strContent.push_back(str);
 	
 				}
-			}
+			//}
 		}
 		else
 		{
-	
-			v_strName.clear();
-			v_strContent.clear();
-			m_DlgB.v_Mnamestr.clear();
-	
+			bool flats = FALSE;
+			//遍历比较消息顺序是否改变
 			for (i = 0; i < v_strReName.size(); i++)
 			{
-				str = v_strReName[i];
-				v_strName.push_back(str);
-				m_DlgB.v_Mnamestr.push_back(str);
-				str = v_strReContent[i];
-				v_strContent.push_back(str);
-	
+				//改变了就为true
+				if (v_strName[i] != v_strReName[i])
+				{
+					flats = TRUE;
+					break;
+				}
 			}
-			
+			//清除消息容器，导入原始消息
+			if (flats == TRUE)
+			{
+				v_strName.clear();
+				v_strContent.clear();
+				m_DlgB.v_Mnamestr.clear();
+
+				for (i = 0; i < v_strReName.size(); i++)
+				{
+					str = v_strReName[i];
+					v_strName.push_back(str);
+					m_DlgB.v_Mnamestr.push_back(str);
+					str = v_strReContent[i];
+					v_strContent.push_back(str);
+
+				}
+
+			}
+
 		}
-	
-	
 	
 			UpdateData(true);
 			this->GetParent()->SendMessage(WM_MY_TIPMESSAGE, 0, 0);

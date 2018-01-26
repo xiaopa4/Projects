@@ -1,13 +1,22 @@
-
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 播放器的设置
+* 摘 要： 界面
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // myplayerDlg.cpp : 实现文件
 //
 
 #include "stdafx.h"
 #include "myplayer.h"
-#include "myplayerDlg.h"
-#include "afxdialogex.h"
-#include <shlwapi.h>
-#include <strsafe.h>
+#include "myplayerDlg.h"	// 自定义对话框的头文件
+#include "afxdialogex.h"	// 引用非标准库的头文件
+#include <shlwapi.h>		// 引用标准库的头文件
+#include <strsafe.h>		// 引用标准库的头文件
 
 
 
@@ -98,7 +107,7 @@ BOOL CmyplayerDlg::OnInitDialog()
 	LoadConfig();
 
 	CDialogEx::OnInitDialog();
-
+	
 	// 将“关于...”菜单项添加到系统菜单中。
 
 	// IDM_ABOUTBOX 必须在系统命令范围内。
@@ -186,13 +195,22 @@ HCURSOR CmyplayerDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-
-
+/***************************************************************************
+* 函数名称：[OnCbnSelchangeCombo]
+* 摘 要： 判断语言栏改变
+* 全局影响：语言栏变动激活应用按钮
+* 参数： void
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CmyplayerDlg::OnCbnSelchangeCombo()
 {
 	// TODO:  在此添加控件通知处理程序代码
 	CComboBox* pctrLanguage = (CComboBox*)GetDlgItem(IDC_COMBO);
 	int selLanguage=0;
+	//取得下拉语言栏序列号
 	selLanguage = pctrLanguage->GetCurSel();
 	if (selLanguage != m_stConfig.iLanguage)
 	{
@@ -203,12 +221,22 @@ void CmyplayerDlg::OnCbnSelchangeCombo()
 
 }
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedChBosskey]
+* 摘 要： 按下老板键处理函数
+* 全局影响：激活应用按钮与热键框
+* 参数： void
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CmyplayerDlg::OnBnClickedChBosskey()
 {
 	// TODO:  在此添加控件通知处理程序代码
 	CButton* BossKey = (CButton*)GetDlgItem(IDC_CH_BOSSKEY);
 	CHotKeyCtrl* HotKey = (CHotKeyCtrl*)GetDlgItem(IDC_HOTKEY1);
+	//老板键是否按下
 	if (BossKey->GetCheck() == 1)
 		HotKey->EnableWindow(TRUE);
 	else
@@ -217,7 +245,16 @@ void CmyplayerDlg::OnBnClickedChBosskey()
 }
 
 
-
+/***************************************************************************
+* 函数名称：[OnEnChangeEdit1]
+* 摘 要： 跳跃时长编辑框的处理函数
+* 全局影响：激活应用
+* 参数： void
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CmyplayerDlg::OnEnChangeEdit1()
 {
 	// 发送此通知，除非重写 CDialogEx::OnInitDialog()
@@ -233,6 +270,17 @@ void CmyplayerDlg::OnEnChangeEdit1()
 	GetDlgItem(IDC_APPLY)->EnableWindow(TRUE);
 	
 }
+
+/***************************************************************************
+* 函数名称：[LoadConfig]
+* 摘 要： 加载配置文件
+* 全局影响：加载ini初始化
+* 参数： void
+* 返回值：TRUE
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 BOOL CmyplayerDlg::LoadConfig()
 {
 	// 获取当前程序文件目录
@@ -325,6 +373,17 @@ BOOL CmyplayerDlg::LoadConfig()
 
 	return TRUE;
 }
+
+/***************************************************************************
+* 函数名称：[SaveConfig]
+* 摘 要： 保存配置文件
+* 全局影响：生成ini文件
+* 参数： void
+* 返回值：TRUE
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 BOOL CmyplayerDlg::SaveConfig()
 {
 	if (UpdateData() == FALSE)
@@ -394,7 +453,16 @@ void CmyplayerDlg::OnNMOutofmemoryHotkey1(NMHDR *pNMHDR, LRESULT *pResult)
 	*pResult = 0;
 }
 
-
+/***************************************************************************
+* 函数名称：[OnClickItem]
+* 摘 要： 消息范围映射处理
+* 全局影响：激活应用按钮
+* 参数： UINT nID
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CmyplayerDlg::OnClickItem(UINT nID)
 {
 	// TODO:

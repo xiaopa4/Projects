@@ -1,3 +1,14 @@
+
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 消息提示器
+* 摘 要： 新建消息对话框定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // DialogB.cpp : 实现文件
 //
 
@@ -57,20 +68,30 @@ void CDialogB::OnEnChangeName()
 
 }
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedSetup]
+* 摘 要： 创建消息
+* 全局影响：发送消息给消息管理对话框
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CDialogB::OnBnClickedSetup()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
 	UpdateData(true);
 	bool IsAdd = true;
+	//名字和内容是否没输入
 	if (m_strName == _T("") | m_strContent == _T(""))
 	{
 		MessageBox(_T("请将信息填充完整！"));
 	}
 	else
 	{
-		//查找消息名是否重复，消息名重复则不会存储
+		//查找消息名是否重复
 		for (int i = 0; i < v_Mnamestr.size(); i++)
 		{
 
@@ -82,9 +103,11 @@ void CDialogB::OnBnClickedSetup()
 			}
 
 		}
+		//不重复为true
 		if (IsAdd == true)
 		{
 			v_Mnamestr.push_back(m_strName);
+			UpdateData(true);
 			this->GetParent()->SendMessage(WM_MY_MESSAGE, 0, 0);
 			m_Name.SetWindowText(_T(""));
 			m_Content.SetWindowText(_T(""));

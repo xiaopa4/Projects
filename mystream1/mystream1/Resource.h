@@ -33,7 +33,7 @@
 #define ID_32776                        32776
 #define ID_32777                        32777
 #define ID_Menu                         32778
-#define WM_ADD_OK (WM_USER+200)                      
+
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
