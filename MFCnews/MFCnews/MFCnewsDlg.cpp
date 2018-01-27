@@ -15,7 +15,7 @@
 #include "MFCnews.h"
 #include "MFCnewsDlg.h"
 #include "afxdialogex.h"
-#include "DialogA.h"
+#include "NewsMang.h"
 
 
 #ifdef _DEBUG

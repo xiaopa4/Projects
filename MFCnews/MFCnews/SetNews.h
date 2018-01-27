@@ -13,15 +13,15 @@
 #include <vector>		// 引用标准库的头文件
 using namespace std;
 
-// CDialogB 对话框
+// CSetNews 对话框
 
-class CDialogB : public CDialogEx
+class CSetNews : public CDialogEx
 {
-	DECLARE_DYNAMIC(CDialogB)
+	DECLARE_DYNAMIC(CSetNews)
 
 public:
-	CDialogB(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~CDialogB();
+	CSetNews(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~CSetNews();
 
 // 对话框数据
 	enum { IDD = IDD_DIALOG2 };

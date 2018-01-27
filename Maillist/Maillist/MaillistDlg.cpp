@@ -1,4 +1,13 @@
-
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 通讯薄对话框
+* 摘 要： 定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // MaillistDlg.cpp : 实现文件
 //
 
@@ -49,6 +58,7 @@ END_MESSAGE_MAP()
 
 CMaillistDlg::CMaillistDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMaillistDlg::IDD, pParent)
+	//变量初始化
 	, m_strName(_T(""))
 	, m_strIDName(_T(""))
 	, m_strTel1(_T(""))
@@ -258,18 +268,29 @@ void CMaillistDlg::OnBnClickedDelsort()
 
 }
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedAddg]
+* 摘 要： 开始拖拽
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CMaillistDlg::OnBnClickedAddg()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
 	UpdateData(TRUE);
+	//是否输入名字
 	if (m_strName == _T(""))
 	{
 		::MessageBox(NULL, _T("请将信息填充完整！"), _T("提示"), MB_OK);
 	}
 	else
 	{
+		//是否人名已经存在
 		int i;
 		for (i = 0; i < 20; i++)
 		{
@@ -283,6 +304,7 @@ void CMaillistDlg::OnBnClickedAddg()
 		{
 			i++;
 		}
+		//保存
 		UpdateData(TRUE);
 		m_ctrName.GetWindowText(m_strMsg[i][0]);
 		m_strName = m_strMsg[i][0];
@@ -301,6 +323,17 @@ void CMaillistDlg::OnBnClickedAddg()
 		m_clsTree.RedrawWindow();
 	}
 }
+
+/***************************************************************************
+* 函数名称：[clearfun]
+* 摘 要： 自定义清除函数
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CMaillistDlg::clearfun()
 {
 	m_ctrName.SetWindowText(_T(""));
@@ -319,7 +352,16 @@ void CMaillistDlg::clearfun()
 }
 
 
-
+/***************************************************************************
+* 函数名称：[OnNMClickContactTree]
+* 摘 要： 树形控件点击响应
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CMaillistDlg::OnNMClickContactTree(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	// TODO:  在此添加控件通知处理程序代码
@@ -330,7 +372,7 @@ void CMaillistDlg::OnNMClickContactTree(NMHDR *pNMHDR, LRESULT *pResult)
 	HTREEITEM hItem = m_clsTree.HitTest(pt, &uFlags);
 
 
-
+	//是否点击空白处
 	if (hItem == NULL)
 	{
 		m_ctrDelSort.EnableWindow(FALSE);
@@ -354,12 +396,13 @@ void CMaillistDlg::OnNMClickContactTree(NMHDR *pNMHDR, LRESULT *pResult)
 		//hPreHandle = NULL;
 		return;
 	}
+	//是否点击到标签项
 	if (hItem != NULL && (TVHT_ONITEM & uFlags))
 	{
 		m_clsTree.SelectItem(hItem);
 
 		hHandle = m_clsTree.GetSelectedItem();
-		
+		//是否是根节点
 		if (m_clsTree.GetParentItem(hPreHandle) == NULL)
 		{
 			

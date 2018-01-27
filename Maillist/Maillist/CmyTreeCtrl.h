@@ -1,3 +1,13 @@
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 树形控件
+* 摘 要： 头文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 #pragma once
 
 
@@ -21,11 +31,14 @@ protected:
 	CImageList*   m_pDragImage;      //拖动时显示的图象列表
 	HTREEITEM     m_hItemDragS;      //被拖动的标签
 	HTREEITEM     m_hItemDragD;      //接受拖动的标签
+	//开始拖拽
 	afx_msg void OnBegindrag(NMHDR* pNMHDR, LRESULT* pResult);
+	//拖动
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	//放下
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	//afx_msg void OnTimer(UINT nIDEvent);
+	
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 	DECLARE_MESSAGE_MAP()

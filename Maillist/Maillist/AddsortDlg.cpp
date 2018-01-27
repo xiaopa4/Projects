@@ -1,3 +1,13 @@
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 添加分组窗口
+* 摘 要： 定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // AddsortDlg.cpp : 实现文件
 //
 
@@ -13,7 +23,7 @@ IMPLEMENT_DYNAMIC(CAddsortDlg, CDialogEx)
 
 CAddsortDlg::CAddsortDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CAddsortDlg::IDD, pParent)
-	
+	//变量初始化
 	, m_strName(_T(""))
 {
 	
@@ -54,7 +64,7 @@ END_MESSAGE_MAP()
 //
 //}
 
-
+//确定添加分组
 void CAddsortDlg::OnBnClickedOk()
 {
 	// TODO:  在此添加控件通知处理程序代码

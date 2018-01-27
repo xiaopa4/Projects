@@ -1,4 +1,13 @@
-
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 视图窗口
+* 摘 要： 头文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // ViewView.h : CViewView 类的接口
 //
 
@@ -41,9 +50,13 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
+	//画面属性设置
 	afx_msg void OnMenuset();
+	//换面属性对话框变量
 	CMenuDialog m_clsMenuDlg;
+	//处理鼠标消息
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	//退出
 	afx_msg void OnEquit();
 public:
 	int m_nPenw;

@@ -14,7 +14,7 @@
 
 #pragma once
 #include "afxwin.h"		// 引用非标准库的头文件
-#include "DialogA.h"	// 引用自定义的头文件
+#include "NewsMang.h"	// 引用自定义的头文件
 #include <vector>		// 引用标准库的头文件
 using namespace std;
 
@@ -59,7 +59,7 @@ public:
 	//退出
 	afx_msg void OnBnClickedQuit();
 	//消息管理对话框关联变量
-	CDialogA m_DlgA;
+	CNewsMang m_DlgA;
 public:
 	//自定义消息
 	afx_msg LRESULT OnMyTIPMessage(WPARAM wParam, LPARAM lParam);

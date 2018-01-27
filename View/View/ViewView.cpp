@@ -1,4 +1,13 @@
-		
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 视图窗口
+* 摘 要： 定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // ViewView.cpp : CViewView 类的实现
 //
 
@@ -38,7 +47,7 @@ END_MESSAGE_MAP()
 CViewView::CViewView()
 {
 	// TODO:  在此处添加构造代码
-	
+	//变量初始化
 	m_nPenw = 8;
 	m_cfColor = RGB(0, 0, 255);
 
@@ -57,7 +66,16 @@ BOOL CViewView::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 // CViewView 绘制
-
+/***************************************************************************
+* 函数名称：[OnDraw]
+* 摘 要： 绘制
+* 全局影响：
+* 参数：CDC* pDC
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CViewView::OnDraw(CDC* pDC)
 {
 	CViewDoc* pDoc = GetDocument();
@@ -102,7 +120,7 @@ void CViewView::OnDraw(CDC* pDC)
 	_tcscpy(lf.lfFaceName, _T("宋体"));
 	newFont.CreateFontIndirect(&lf);
 	oldFont = pDC->SelectObject(&newFont);
-
+	//标题显示
 	pDC->SetBkMode(/*OPAQUE*/TRANSPARENT);
 	pDC->SetBkColor(RGB(0, 0, 0));
 	pDC->DrawText(m_strTitle, &rcWnd, DT_CENTER);
@@ -154,7 +172,16 @@ CViewDoc* CViewView::GetDocument() const // 非调试版本是内联的
 
 // CViewView 消息处理程序
 
-
+/***************************************************************************
+* 函数名称：[OnMenuset]
+* 摘 要： 画面属性对话框设置
+* 全局影响：
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CViewView::OnMenuset()
 {
 	// TODO:  在此添加命令处理程序代码
@@ -176,6 +203,7 @@ void CViewView::OnMouseMove(UINT nFlags, CPoint point)
 	//状态栏坐标
 	CString str;
 	str.Format(_T("	X:%d Y:%d"), point.x, point.y);
+	//设置状态栏
 	((CMainFrame*)GetParent())->m_wndStatusBar.SetWindowTextW(str);
 
 	CView::OnMouseMove(nFlags, point);

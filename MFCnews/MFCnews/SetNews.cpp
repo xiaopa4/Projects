@@ -9,23 +9,23 @@
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-// DialogB.cpp : 实现文件
+// SetNews.cpp : 实现文件
 //
 
 #include "stdafx.h"
 #include "MFCnews.h"
-#include "DialogB.h"
-#include "DialogA.h"
+#include "SetNews.h"
+#include "NewsMang.h"
 #include "afxdialogex.h"
 
 
-// CDialogB 对话框
+// CSetNews 对话框
 
 
-IMPLEMENT_DYNAMIC(CDialogB, CDialogEx)
+IMPLEMENT_DYNAMIC(CSetNews, CDialogEx)
 
-CDialogB::CDialogB(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CDialogB::IDD, pParent)
+CSetNews::CSetNews(CWnd* pParent /*=NULL*/)
+	: CDialogEx(CSetNews::IDD, pParent)
 	, m_strName(_T(""))
 	, m_strContent(_T(""))
 {
@@ -33,11 +33,11 @@ CDialogB::CDialogB(CWnd* pParent /*=NULL*/)
 
 }
 
-CDialogB::~CDialogB()
+CSetNews::~CSetNews()
 {
 }
 
-void CDialogB::DoDataExchange(CDataExchange* pDX)
+void CSetNews::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_NAME, m_Name);
@@ -47,17 +47,17 @@ void CDialogB::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CDialogB, CDialogEx)
-	ON_EN_CHANGE(IDC_NAME, &CDialogB::OnEnChangeName)
-	ON_BN_CLICKED(IDC_SETUP, &CDialogB::OnBnClickedSetup)
-	ON_BN_CLICKED(IDC_NOSETUP, &CDialogB::OnBnClickedNosetup)
+BEGIN_MESSAGE_MAP(CSetNews, CDialogEx)
+	ON_EN_CHANGE(IDC_NAME, &CSetNews::OnEnChangeName)
+	ON_BN_CLICKED(IDC_SETUP, &CSetNews::OnBnClickedSetup)
+	ON_BN_CLICKED(IDC_NOSETUP, &CSetNews::OnBnClickedNosetup)
 END_MESSAGE_MAP()
 
 
-// CDialogB 消息处理程序
+// CSetNews 消息处理程序
 
 
-void CDialogB::OnEnChangeName()
+void CSetNews::OnEnChangeName()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialogEx::OnInitDialog()
@@ -78,7 +78,7 @@ void CDialogB::OnEnChangeName()
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-void CDialogB::OnBnClickedSetup()
+void CSetNews::OnBnClickedSetup()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -118,7 +118,7 @@ void CDialogB::OnBnClickedSetup()
 }
 
 
-void CDialogB::OnBnClickedNosetup()
+void CSetNews::OnBnClickedNosetup()
 {
 	// TODO:  在此添加控件通知处理程序代码
 

@@ -101,8 +101,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DialogA.h" />
-    <ClInclude Include="DialogB.h" />
+    <ClInclude Include="NewsMang.h" />
+    <ClInclude Include="SetNews.h" />
     <ClInclude Include="MFCnews.h" />
     <ClInclude Include="MFCnewsDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -110,8 +110,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DialogA.cpp" />
-    <ClCompile Include="DialogB.cpp" />
+    <ClCompile Include="NewsMang.cpp" />
+    <ClCompile Include="SetNews.cpp" />
     <ClCompile Include="MFCnews.cpp" />
     <ClCompile Include="MFCnewsDlg.cpp" />
     <ClCompile Include="stdafx.cpp">

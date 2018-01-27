@@ -19,11 +19,13 @@ public:
 	CColorBtn();
 	~CColorBtn();
 	DECLARE_MESSAGE_MAP()
-	//afx_msg void OnBnClickedColor();
+	//按键响应函数
 	afx_msg void OnBnClicked();
 	//自绘按钮
 	virtual void DrawItem(LPDRAWITEMSTRUCT /*lpDrawItemStruct*/);
+	//获得按钮背景颜色
 	COLORREF GetBGColor();
+	//设置按钮背景颜色
 	bool SetBGColor(COLORREF bgColor);
 public:
 	COLORREF m_bgColor;

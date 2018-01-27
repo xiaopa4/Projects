@@ -11,17 +11,17 @@
 #pragma once
 #include "afxwin.h"		// 引用非标准库的头文件
 #include <vector>		// 引用标准库的头文件
-#include "DialogB.h"	// 引用自定义的头文件
+#include "SetNews.h"	// 引用自定义的头文件
 using namespace std;
-// CDialogA 对话框
+// CNewsMang 对话框
 
-class CDialogA : public CDialogEx
+class CNewsMang : public CDialogEx
 {
-	DECLARE_DYNAMIC(CDialogA)
+	DECLARE_DYNAMIC(CNewsMang)
 
 public:
-	CDialogA(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~CDialogA();
+	CNewsMang(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~CNewsMang();
 
 // 对话框数据
 	enum { IDD = IDD_DIALOG1 };
@@ -61,7 +61,7 @@ public:
 	//记录初始消息个数
 	vector<int>::size_type v_nNums;
 	//新建消息对话框关联变量
-	CDialogB m_DlgB;
+	CSetNews m_DlgB;
 public:
 	//删除消息列表消息
 	afx_msg void OnBnClickedMinus();

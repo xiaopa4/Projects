@@ -9,22 +9,22 @@
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-// DialogA.cpp : 实现文件
+// NewsMang.cpp : 实现文件
 //
 
 #include "stdafx.h"
 #include "MFCnews.h"
-#include "DialogA.h"
-#include "DialogB.h"
+#include "NewsMang.h"
+#include "SetNews.h"
 #include "afxdialogex.h"
 
 
-// CDialogA 对话框
+// CNewsMang 对话框
 
-IMPLEMENT_DYNAMIC(CDialogA, CDialogEx)
+IMPLEMENT_DYNAMIC(CNewsMang, CDialogEx)
 
-CDialogA::CDialogA(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CDialogA::IDD, pParent)
+CNewsMang::CNewsMang(CWnd* pParent /*=NULL*/)
+	: CDialogEx(CNewsMang::IDD, pParent)
 	//初始化变量
 	, m_strMlist(_T(""))
 	, m_strTiplist(_T(""))
@@ -33,11 +33,11 @@ CDialogA::CDialogA(CWnd* pParent /*=NULL*/)
 
 }
 
-CDialogA::~CDialogA()
+CNewsMang::~CNewsMang()
 {
 }
 
-void CDialogA::DoDataExchange(CDataExchange* pDX)
+void CNewsMang::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_MESSAGE_LIST, m_MList);
@@ -50,24 +50,24 @@ void CDialogA::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CDialogA, CDialogEx)
+BEGIN_MESSAGE_MAP(CNewsMang, CDialogEx)
 	ON_MESSAGE(WM_MY_MESSAGE, OnMyMessage)
-	ON_BN_CLICKED(IDC_ADD, &CDialogA::OnClickedAdd)
-	//ON_LBN_SELCHANGE(IDC_MESSAGE_LIST, &CDialogA::OnLbnSelchangeMessageList)
-	ON_BN_CLICKED(IDC_MINUS, &CDialogA::OnBnClickedMinus)
-	ON_BN_CLICKED(IDC_RIGHT, &CDialogA::OnBnClickedRight)
-	ON_BN_CLICKED(IDC_LEFT, &CDialogA::OnBnClickedLeft)
-	ON_BN_CLICKED(IDC_RIGHTSHIFT, &CDialogA::OnBnClickedRightshift)
-	ON_BN_CLICKED(IDC_LEFTSHIFT, &CDialogA::OnBnClickedLeftshift)
-	ON_BN_CLICKED(IDC_UP, &CDialogA::OnBnClickedUp)
-	ON_BN_CLICKED(IDC_DOWN, &CDialogA::OnBnClickedDown)
-	ON_BN_CLICKED(IDC_OK, &CDialogA::OnBnClickedOk)
-	ON_BN_CLICKED(IDC_Cancel, &CDialogA::OnBnClickedCancel)
-	ON_EN_CHANGE(IDC_EDIT1, &CDialogA::OnEnChangeEdit1)
+	ON_BN_CLICKED(IDC_ADD, &CNewsMang::OnClickedAdd)
+	//ON_LBN_SELCHANGE(IDC_MESSAGE_LIST, &CNewsMang::OnLbnSelchangeMessageList)
+	ON_BN_CLICKED(IDC_MINUS, &CNewsMang::OnBnClickedMinus)
+	ON_BN_CLICKED(IDC_RIGHT, &CNewsMang::OnBnClickedRight)
+	ON_BN_CLICKED(IDC_LEFT, &CNewsMang::OnBnClickedLeft)
+	ON_BN_CLICKED(IDC_RIGHTSHIFT, &CNewsMang::OnBnClickedRightshift)
+	ON_BN_CLICKED(IDC_LEFTSHIFT, &CNewsMang::OnBnClickedLeftshift)
+	ON_BN_CLICKED(IDC_UP, &CNewsMang::OnBnClickedUp)
+	ON_BN_CLICKED(IDC_DOWN, &CNewsMang::OnBnClickedDown)
+	ON_BN_CLICKED(IDC_OK, &CNewsMang::OnBnClickedOk)
+	ON_BN_CLICKED(IDC_Cancel, &CNewsMang::OnBnClickedCancel)
+	ON_EN_CHANGE(IDC_EDIT1, &CNewsMang::OnEnChangeEdit1)
 END_MESSAGE_MAP()
 
 
-// CDialogA 消息处理程序
+// CNewsMang 消息处理程序
 
 /***************************************************************************
 * 函数名称：[OnMyMessage]
@@ -79,7 +79,7 @@ END_MESSAGE_MAP()
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-LRESULT  CDialogA::OnMyMessage(WPARAM wParam, LPARAM lParam)
+LRESULT  CNewsMang::OnMyMessage(WPARAM wParam, LPARAM lParam)
 {
 	// TODO: 处理用户自定义消息 
 	//保存新建消息
@@ -100,7 +100,7 @@ LRESULT  CDialogA::OnMyMessage(WPARAM wParam, LPARAM lParam)
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-void CDialogA::OnClickedAdd()
+void CNewsMang::OnClickedAdd()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -110,7 +110,7 @@ void CDialogA::OnClickedAdd()
 }
 
 
-//void CDialogA::OnLbnSelchangeMessageList()
+//void CNewsMang::OnLbnSelchangeMessageList()
 //{
 //	// TODO:  在此添加控件通知处理程序代码
 //
@@ -126,7 +126,7 @@ void CDialogA::OnClickedAdd()
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-BOOL CDialogA::OnInitDialog()
+BOOL CNewsMang::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
@@ -215,7 +215,7 @@ BOOL CDialogA::OnInitDialog()
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-void CDialogA::OnBnClickedMinus()
+void CNewsMang::OnBnClickedMinus()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -249,7 +249,7 @@ void CDialogA::OnBnClickedMinus()
 }
 
 
-void CDialogA::OnBnClickedRight()
+void CNewsMang::OnBnClickedRight()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -267,7 +267,7 @@ void CDialogA::OnBnClickedRight()
 }
 
 
-void CDialogA::OnBnClickedLeft()
+void CNewsMang::OnBnClickedLeft()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -284,7 +284,7 @@ void CDialogA::OnBnClickedLeft()
 }
 
 
-void CDialogA::OnBnClickedRightshift()
+void CNewsMang::OnBnClickedRightshift()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -303,7 +303,7 @@ void CDialogA::OnBnClickedRightshift()
 }
 
 //全部左移
-void CDialogA::OnBnClickedLeftshift()
+void CNewsMang::OnBnClickedLeftshift()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -318,7 +318,7 @@ void CDialogA::OnBnClickedLeftshift()
 }
 
 
-void CDialogA::OnBnClickedUp()
+void CNewsMang::OnBnClickedUp()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -347,7 +347,7 @@ void CDialogA::OnBnClickedUp()
 }
 
 
-void CDialogA::OnBnClickedDown()
+void CNewsMang::OnBnClickedDown()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -383,7 +383,7 @@ void CDialogA::OnBnClickedDown()
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-void CDialogA::OnBnClickedOk()
+void CNewsMang::OnBnClickedOk()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -420,7 +420,7 @@ void CDialogA::OnBnClickedOk()
 * 修改记录：
 *[日期][作者/修改者] [修改原因]
 ***************************************************************************/
-void CDialogA::OnBnClickedCancel()
+void CNewsMang::OnBnClickedCancel()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
@@ -502,7 +502,7 @@ void CDialogA::OnBnClickedCancel()
 }
 
 
-void CDialogA::OnEnChangeEdit1()
+void CNewsMang::OnEnChangeEdit1()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialogEx::OnInitDialog()

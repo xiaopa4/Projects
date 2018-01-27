@@ -1,3 +1,14 @@
+
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 树形控件
+* 摘 要： 定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // CmyTreeCtrl.cpp : 实现文件
 //
 
@@ -37,7 +48,16 @@ END_MESSAGE_MAP()
 
 
 
-
+/***************************************************************************
+* 函数名称：[OnBegindrag]
+* 摘 要： 开始拖拽
+* 全局影响：
+* 参数：NMHDR *pNMHDR, LRESULT *pResult
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CmyTreeCtrl::OnBegindrag(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	NM_TREEVIEW* pNMTreeView = (NM_TREEVIEW*)pNMHDR;
@@ -59,15 +79,25 @@ void CmyTreeCtrl::OnBegindrag(NMHDR *pNMHDR, LRESULT *pResult)
 	m_pDragImage->BeginDrag(0, CPoint(8, 8));
 	CPoint  pt = pNMTreeView->ptDrag;
 	ClientToScreen(&pt);
+	//拖拽
 	m_pDragImage->DragEnter(this, pt);  //"this"将拖曳动作限制在该窗口
 	SetCapture();
-
+	//滚动定时器返回值
 	m_nScrollTimerID = SetTimer(2, 40, NULL);
 }
 
 
 
-
+/***************************************************************************
+* 函数名称：[OnMouseMove]
+* 摘 要： 处理鼠标消息
+* 全局影响：
+* 参数：UINT nFlags, CPoint point
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CmyTreeCtrl::OnMouseMove(UINT nFlags, CPoint point)
 {
 	HTREEITEM  hItem;
@@ -85,6 +115,7 @@ void CmyTreeCtrl::OnMouseMove(UINT nFlags, CPoint point)
 	if (m_bDragging)
 	{
 		CPoint  pt = point;
+		//拖拽移动
 		CImageList::DragMove(pt);
 
 		//避免鼠标经过时留下难看的痕迹
@@ -97,10 +128,10 @@ void CmyTreeCtrl::OnMouseMove(UINT nFlags, CPoint point)
 		CImageList::DragShowNolock(true);
 
 		//当条目被拖曳到左边缘时，将条目放在根下
-		/*CRect  rect;
+		CRect  rect;
 		GetClientRect(&rect);
 		if (point.x < rect.left + 20)
-			m_hItemDragD = NULL;*/
+			m_hItemDragD = NULL;
 	}
 
 	CTreeCtrl::OnMouseMove(nFlags, point);
@@ -108,7 +139,16 @@ void CmyTreeCtrl::OnMouseMove(UINT nFlags, CPoint point)
 
 
 
-
+/***************************************************************************
+* 函数名称：[OnLButtonUp]
+* 摘 要： 拖拽结束，放下拖拽图像
+* 全局影响：
+* 参数：UINT nFlags, CPoint point
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CmyTreeCtrl::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	CTreeCtrl::OnLButtonUp(nFlags, point);
@@ -117,6 +157,7 @@ void CmyTreeCtrl::OnLButtonUp(UINT nFlags, CPoint point)
 	{
 		m_bDragging = FALSE;
 		CImageList::DragLeave(this);
+		//结束拖拽
 		CImageList::EndDrag();
 		ReleaseCapture();
 		delete m_pDragImage;

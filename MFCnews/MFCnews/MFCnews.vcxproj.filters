@@ -33,10 +33,10 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DialogB.h">
+    <ClInclude Include="NewsMang.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DialogA.h">
+    <ClInclude Include="SetNews.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,10 +50,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="DialogA.cpp">
+    <ClCompile Include="NewsMang.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="DialogB.cpp">
+    <ClCompile Include="SetNews.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

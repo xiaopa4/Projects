@@ -1,3 +1,13 @@
+/***************************************************************************
+* Copyright (c) 2017, AEC, All rights reserved.
+*
+* 文件名称： 画面属性对话框
+* 摘 要： 定义文件
+* 作 者： 张育斌
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 // MenuDialog.cpp : 实现文件
 //
 
@@ -13,6 +23,7 @@ IMPLEMENT_DYNAMIC(CMenuDialog, CDialogEx)
 
 CMenuDialog::CMenuDialog(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMenuDialog::IDD, pParent)
+	//变量初始化
 	, m_strTitle(_T("画面一"))
 	, m_nSilder(8)
 	, m_nWidth(8)
@@ -53,7 +64,16 @@ END_MESSAGE_MAP()
 
 // CMenuDialog 消息处理程序
 
-
+/***************************************************************************
+* 函数名称：[OnInitDialog]
+* 摘 要： 初始化函数
+* 全局影响：设置滚动条，激活且添加提示条
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 BOOL CMenuDialog::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
@@ -69,7 +89,7 @@ BOOL CMenuDialog::OnInitDialog()
 	m_ctrTT.Create(this);
 	m_ctrTT.Activate(TRUE);
 	//font color
-	//m_ctrTT.SetTipTextColor(RGB(0, 0,0));
+	//m_ctrTT.SetTipTextColor(RGB(255, 0, 0));
 	//delay time
 	m_ctrTT.SetDelayTime(150);
 	//添加提示的控件
@@ -86,6 +106,7 @@ BOOL CMenuDialog::PreTranslateMessage(MSG* pMsg)
 {
 	// TODO:  在此添加专用代码和/或调用基类
 
+	//通过鼠标消息处理的工具提示控件
 	m_ctrTT.RelayEvent(pMsg);
 
 	return CDialogEx::PreTranslateMessage(pMsg);
@@ -97,24 +118,39 @@ BOOL CMenuDialog::PreTranslateMessage(MSG* pMsg)
 void CMenuDialog::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
 	// TODO:  在此添加消息处理程序代码和/或调用默认值
+
+	//获得滚动条对应的值
 	m_nSilder = m_ctrSilder.GetPos();
+	//在宽度编辑框显示
 	SetDlgItemInt(IDC_WIDTH, m_nSilder, true);
 	
 	CDialogEx::OnHScroll(nSBCode, nPos, pScrollBar);
 	
 }
 
-
+/***************************************************************************
+* 函数名称：[OnBnClickedBrowse]
+* 摘 要： 浏览
+* 全局影响：取得图片路径
+* 参数：
+* 返回值：
+*
+* 修改记录：
+*[日期][作者/修改者] [修改原因]
+***************************************************************************/
 void CMenuDialog::OnBnClickedBrowse()
 {
 	// TODO:  在此添加控件通知处理程序代码
 
+	//文件使用打开操作的通用对话框
 	CFileDialog dlg(TRUE,NULL, NULL, 
 		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
 		_T("(*.bmp)|*.bmp|(*.jpg)|*.jpg|(*.png)|*.png|"));
 	if (dlg.DoModal() == IDOK)
 	{
+		//检索文件的完整路径
 		fileName = dlg.GetPathName();
+		//显示
 		m_ctrPath.SetWindowTextW(fileName);
 	
 	}
